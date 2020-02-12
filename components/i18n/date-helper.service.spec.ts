@@ -72,4 +72,29 @@ describe('DateHelperService', () => {
       expect(dateHelper.getFirstDayOfWeek()).toBe(4);
     });
   });
+
+  describe('ParseTime', () => {
+    beforeEach(() => {
+      injector = TestBed.configureTestingModule({
+        imports: [NzI18nModule]
+      });
+
+      dateHelper = injector.get(DateHelperService);
+    });
+
+    it('should parse custom time', () => {
+      expect(
+        dateHelper
+          .parseTime('14:00')
+          ?.toTimeString()
+          .substr(0, 8)
+      ).toBe('14:00:00');
+      expect(
+        dateHelper
+          .parseTime('4:00')
+          ?.toTimeString()
+          .substr(0, 8)
+      ).toBe('04:00:00');
+    });
+  });
 });
